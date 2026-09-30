@@ -25,25 +25,25 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Publish verified preview package
+      - name: Publish verified package
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         shell: bash
         run: |
           set -euo pipefail
-          asset='RG-AI-Assistant-Revit2024-2025-2026-v2.4.0-preview.2.zip'
-          digest='05bbca4ce1d59d7e883e43789c342ecc4e6d43519eddd7eb443fe25bf4036a47'
+          asset='RG-AI-Assistant-Revit2024-2025-2026-v3.0.0.zip'
+          digest='266a6aaadf1e39e4a0819d45c1e681adc163eb8da8227f3caf55ce07f0d31133'
           (cd packages && sha256sum -c ../SHA256SUMS.txt)
-          if gh release view v2.4.0-preview.2 --json assets > release.json 2>/dev/null; then
+          if gh release view v3.0.0 --json assets > release.json 2>/dev/null; then
             test "$(jq -r --arg name "$asset" '.assets[]|select(.name==$name)|.digest' release.json)" = "sha256:$digest"
           else
-            gh release create v2.4.0-preview.2 "packages/$asset" SHA256SUMS.txt \
-              --target "$GITHUB_SHA" --prerelease --title 'AI RG: Bob Workspace 2.4 Preview' \
+            gh release create v3.0.0 "packages/$asset" SHA256SUMS.txt \
+              --target "$GITHUB_SHA" --latest --title 'AI RG: Bob 3.0' \
               --notes-file RELEASE-NOTES.md
           fi
           # No token is sent in these verification requests.
-          curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/download/v2.4.0-preview.2/$asset" --output anonymous-download.zip
+          curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/download/v3.0.0/$asset" --output anonymous-download.zip
           echo "$digest  anonymous-download.zip" | sha256sum -c -
           curl --fail --location --retry 3 "https://raw.githubusercontent.com/$GH_REPO/main/Install-Bob.ps1" --output anonymous-installer.ps1
           cmp Install-Bob.ps1 anonymous-installer.ps1

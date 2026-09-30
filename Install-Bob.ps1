@@ -2,9 +2,9 @@
 [CmdletBinding()]
 param([ValidateSet('All','2024','2025','2026')][string[]]$Versions = @('All'))
 $ErrorActionPreference = 'Stop'
-$script:BobVersion = '2.4.0-preview.2'
-$script:BobFile = 'RG-AI-Assistant-Revit2024-2025-2026-v2.4.0-preview.2.zip'
-$script:BobHash = '05bbca4ce1d59d7e883e43789c342ecc4e6d43519eddd7eb443fe25bf4036a47'
+$script:BobVersion = '3.0.0'
+$script:BobFile = 'RG-AI-Assistant-Revit2024-2025-2026-v3.0.0.zip'
+$script:BobHash = '266a6aaadf1e39e4a0819d45c1e681adc163eb8da8227f3caf55ce07f0d31133'
 $script:BobUrl = "https://github.com/amhsekol/ai-rg-bob-installer/releases/download/v$script:BobVersion/$script:BobFile"
 
 function Assert-BobPackage {
@@ -65,7 +65,7 @@ function Install-Bob {
     Write-Host "Bob $script:BobVersion installed. Open Revit > AI RG > Chat with Bob." -ForegroundColor Green
     Write-Host 'Your existing Claude settings and installation backups are retained.'
     Write-Host 'New users: install official Claude Code and sign into your own eligible Claude account.'
-    Write-Host 'Unsigned preview. Test on a model copy before production use.'
+    Write-Host 'Unsigned build. Test on a model copy before production use.'
 }
 
 if ($MyInvocation.InvocationName -ne '.') { Install-Bob -TargetVersions $Versions }

@@ -1,6 +1,6 @@
 # AI RG: Bob for Revit
 
-Public installer distribution for Bob Workspace 2.4 Preview, supporting Revit 2024, 2025 and 2026 on Windows. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
+Public installer distribution for Bob 3.0, supporting Revit 2024, 2025 and 2026 on Windows. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
 
 ## Install with one command
 
@@ -16,7 +16,7 @@ This command executes the installation script published in this repository. Revi
 
 The installer targets all three supported years by default. It does not install Revit itself, close Revit forcibly, install a Windows service or silently run future updates.
 
-After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm version **2.4.0-preview.2**. Existing users keep their Claude settings and sign-in.
+After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.0** (package version 3.0.0). Existing users keep their Claude settings and sign-in.
 
 ## First-time Claude setup
 
@@ -39,7 +39,7 @@ Use your own account in the official sign-in flow. In Bob's **AI Settings**, set
 
 ## Included workflows and limits
 
-- **Workspace:** Expand/maximize/restore, read-only result tables, tooltips and direct Continue for clarification choices.
+- **Workspace:** Visible Maximize opens a maximized window in one click. Full screen removes window chrome; F11 toggles it and Esc exits full screen without cancelling work. Return to dock preserves the same chat, draft and request. Read-only result tables, tooltips and direct Continue for clarification choices remain available.
 - **Visible activity:** Prominent working card, moving activity bar, staggered pulse dots, actual stage labels, elapsed time and queued-work Stop. Approval waiting, completion and errors are distinct states. No invented percentages or pretend activity while idle.
 - **Chats:** New/previous conversations, search, rename, pin, archive and safe resume. Disk history is opt-in in Chats.
 - **Skills:** Built-in and personal instruction recipes, editable inputs, versions and reviewed imports. Project/Team collections are local, not cloud-synchronized.
@@ -47,7 +47,7 @@ Use your own account in the official sign-in flow. In Bob's **AI Settings**, set
 - **Exports:** Chat PDF/Markdown/XLSX, bounded host-view inventories, parameter templates and drawing PDFs.
 - **Imports:** Same-open-session writable text instance parameters and separately approved RFA loading. Numeric/type parameters and dedicated RVT/IFC/DWG imports are not supported.
 
-This is an **unsigned preview**, not production certification. Real Revit behavior and the user's Claude connection need testing on model copies. Model changes require approval. Advanced generated code, if explicitly enabled, is full-trust and not sandboxed.
+This is an **unsigned build**, not production certification. Real Revit behavior and the user's Claude connection need testing on model copies. Model changes require approval. Advanced generated code, if explicitly enabled, is full-trust and not sandboxed.
 
 Activity animation respects Windows reduced-motion settings. Native Revit operations that occupy its UI thread can temporarily pause the display; an animation is not a guarantee that Revit is responsive. Elapsed time includes provider and approval waiting, not an estimate of time remaining.
 
@@ -66,7 +66,7 @@ The package includes `START-HERE.md`, `UI-VERIFICATION.md`, per-year build manif
 The current ZIP SHA-256 is:
 
 ```text
-05bbca4ce1d59d7e883e43789c342ecc4e6d43519eddd7eb443fe25bf4036a47
+266a6aaadf1e39e4a0819d45c1e681adc163eb8da8227f3caf55ce07f0d31133
 ```
 
 The public installer workflow tests Windows PowerShell 5.1 and PowerShell 7, checks the package hash and rejects unsafe archive paths before publishing a release. Automated checks do not replace live testing inside Revit.
