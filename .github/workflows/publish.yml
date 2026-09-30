@@ -1,0 +1,49 @@
+name: Verify and publish public installer
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Windows PowerShell 5.1
+        shell: powershell
+        run: ./tests/Test-Installer.ps1
+      - name: PowerShell 7
+        shell: pwsh
+        run: ./tests/Test-Installer.ps1
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish verified preview package
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          asset='RG-AI-Assistant-Revit2024-2025-2026-v2.4.0-preview.1.zip'
+          digest='f3d871d9df3a631c9597204b41b84ca3f59f87aa7a51df559c26c6cdfae663fe'
+          (cd packages && sha256sum -c ../SHA256SUMS.txt)
+          if gh release view v2.4.0-preview.1 --json assets > release.json 2>/dev/null; then
+            test "$(jq -r --arg name "$asset" '.assets[]|select(.name==$name)|.digest' release.json)" = "sha256:$digest"
+          else
+            gh release create v2.4.0-preview.1 "packages/$asset" SHA256SUMS.txt \
+              --target "$GITHUB_SHA" --prerelease --title 'AI RG: Bob Workspace 2.4 Preview' \
+              --notes-file RELEASE-NOTES.md
+          fi
+          # No token is sent in these verification requests.
+          curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/download/v2.4.0-preview.1/$asset" --output anonymous-download.zip
+          echo "$digest  anonymous-download.zip" | sha256sum -c -
+          curl --fail --location --retry 3 "https://raw.githubusercontent.com/$GH_REPO/main/Install-Bob.ps1" --output anonymous-installer.ps1
+          cmp Install-Bob.ps1 anonymous-installer.ps1
