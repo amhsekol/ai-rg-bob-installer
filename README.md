@@ -16,7 +16,7 @@ This command executes the installation script published in this repository. Revi
 
 The installer targets all three supported years by default. It does not install Revit itself, close Revit forcibly, install a Windows service or silently run future updates.
 
-After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm version **2.4.0-preview.1**. Existing users keep their Claude settings and sign-in.
+After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm version **2.4.0-preview.2**. Existing users keep their Claude settings and sign-in.
 
 ## First-time Claude setup
 
@@ -40,6 +40,7 @@ Use your own account in the official sign-in flow. In Bob's **AI Settings**, set
 ## Included workflows and limits
 
 - **Workspace:** Expand/maximize/restore, read-only result tables, tooltips and direct Continue for clarification choices.
+- **Visible activity:** Prominent working card, moving activity bar, staggered pulse dots, actual stage labels, elapsed time and queued-work Stop. Approval waiting, completion and errors are distinct states. No invented percentages or pretend activity while idle.
 - **Chats:** New/previous conversations, search, rename, pin, archive and safe resume. Disk history is opt-in in Chats.
 - **Skills:** Built-in and personal instruction recipes, editable inputs, versions and reviewed imports. Project/Team collections are local, not cloud-synchronized.
 - **References:** Text, selected PDF text pages, selected XLSX worksheets and PNG/JPG previews; view capture. No scanned-PDF OCR.
@@ -47,6 +48,8 @@ Use your own account in the official sign-in flow. In Bob's **AI Settings**, set
 - **Imports:** Same-open-session writable text instance parameters and separately approved RFA loading. Numeric/type parameters and dedicated RVT/IFC/DWG imports are not supported.
 
 This is an **unsigned preview**, not production certification. Real Revit behavior and the user's Claude connection need testing on model copies. Model changes require approval. Advanced generated code, if explicitly enabled, is full-trust and not sandboxed.
+
+Activity animation respects Windows reduced-motion settings. Native Revit operations that occupy its UI thread can temporarily pause the display; an animation is not a guarantee that Revit is responsive. Elapsed time includes provider and approval waiting, not an estimate of time remaining.
 
 ## Privacy and distribution
 
@@ -63,7 +66,7 @@ The package includes `START-HERE.md`, `UI-VERIFICATION.md`, per-year build manif
 The current ZIP SHA-256 is:
 
 ```text
-f3d871d9df3a631c9597204b41b84ca3f59f87aa7a51df559c26c6cdfae663fe
+05bbca4ce1d59d7e883e43789c342ecc4e6d43519eddd7eb443fe25bf4036a47
 ```
 
 The public installer workflow tests Windows PowerShell 5.1 and PowerShell 7, checks the package hash and rejects unsafe archive paths before publishing a release. Automated checks do not replace live testing inside Revit.
