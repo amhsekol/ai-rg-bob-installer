@@ -32,18 +32,21 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          asset='RG-AI-Assistant-Revit2024-2025-2026-v3.0.0.zip'
-          digest='266a6aaadf1e39e4a0819d45c1e681adc163eb8da8227f3caf55ce07f0d31133'
+          version="$(jq -er '.version' update.json)"
+          asset="RG-AI-Assistant-Revit2024-2025-2026-v$version.zip"
+          digest="$(jq -er '.sha256' update.json)"
           (cd packages && sha256sum -c ../SHA256SUMS.txt)
-          if gh release view v3.0.0 --json assets > release.json 2>/dev/null; then
+          if gh release view "v$version" --json assets > release.json 2>/dev/null; then
             test "$(jq -r --arg name "$asset" '.assets[]|select(.name==$name)|.digest' release.json)" = "sha256:$digest"
           else
-            gh release create v3.0.0 "packages/$asset" SHA256SUMS.txt \
-              --target "$GITHUB_SHA" --latest --title 'AI RG: Bob 3.0' \
+            gh release create "v$version" "packages/$asset" SHA256SUMS.txt update.json \
+              --target "$GITHUB_SHA" --latest --title "AI RG: Bob $version" \
               --notes-file RELEASE-NOTES.md
           fi
           # No token is sent in these verification requests.
-          curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/download/v3.0.0/$asset" --output anonymous-download.zip
+          curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/download/v$version/$asset" --output anonymous-download.zip
           echo "$digest  anonymous-download.zip" | sha256sum -c -
           curl --fail --location --retry 3 "https://raw.githubusercontent.com/$GH_REPO/main/Install-Bob.ps1" --output anonymous-installer.ps1
           cmp Install-Bob.ps1 anonymous-installer.ps1
+          curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/latest/download/update.json" --output anonymous-update.json
+          cmp update.json anonymous-update.json

@@ -1,6 +1,6 @@
 # AI RG: Bob for Revit
 
-Public installer distribution for Bob 3.0, supporting Revit 2024, 2025 and 2026 on Windows. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
+Public installer distribution for Bob 3.0.1, supporting Revit 2024, 2025 and 2026 on Windows. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
 
 ## Install with one command
 
@@ -16,7 +16,17 @@ This command executes the installation script published in this repository. Revi
 
 The installer targets all three supported years by default. It does not install Revit itself, close Revit forcibly, install a Windows service or silently run future updates.
 
-After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.0** (package version 3.0.0). Existing users keep their Claude settings and sign-in.
+After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.0.1**. Existing users keep their Claude settings and sign-in.
+
+## Future updates inside Bob
+
+Starting with 3.0.1, choose **Check for updates** inside Bob. Automatic checks are enabled by default and check daily while Bob/Revit is running; a newer published version produces an in-panel notice. You can disable automatic checks in the Updates window. There is no background service or notification while Revit is closed.
+
+Choose **Install after Revit closes**, review the release, then approve **Download and schedule**. Bob downloads and verifies the package and opens an updater window. Save your models, close ALL Revit windows yourself, and leave the updater open. It waits up to two hours, verifies the package again, installs with backups and tells you when to reopen Revit. No commands or GitHub login are needed; Windows PowerShell runs internally and company execution policies still apply. Do not close the updater or reopen Revit during installation.
+
+The update retains chats, skills and Claude settings. Cancel during download to stop before scheduling; close the updater before installation starts to cancel a queued update. Check again to retry after an offline check, cancelled updater or timeout. Logs/results live under `%LOCALAPPDATA%\RGConstruction\RevitAI\workspace\updates`. Tests do not replace live shutdown/restart acceptance on a workstation.
+
+Users on 3.0.0 or earlier need to run the public install command once to get these controls. Later published releases can be installed from Bob.
 
 ## First-time Claude setup
 
@@ -66,7 +76,7 @@ The package includes `START-HERE.md`, `UI-VERIFICATION.md`, per-year build manif
 The current ZIP SHA-256 is:
 
 ```text
-266a6aaadf1e39e4a0819d45c1e681adc163eb8da8227f3caf55ce07f0d31133
+ca38503d875209a8bf24b3bfc490af04d389d2e7fa3ff477d1f153230f4c4843
 ```
 
 The public installer workflow tests Windows PowerShell 5.1 and PowerShell 7, checks the package hash and rejects unsafe archive paths before publishing a release. Automated checks do not replace live testing inside Revit.

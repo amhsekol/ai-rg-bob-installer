@@ -12,6 +12,10 @@ $script:running=$false; $script:networkFailure=$false; $script:childFailure=$fal
 $script:downloads=0; $script:installs=0; $script:downloadPath=''; $script:lastVersions=''
 try {
     $env:OS='Windows_NT'
+    $feed = Get-Content (Join-Path $root 'update.json') -Raw | ConvertFrom-Json
+    Assert ($feed.schema -eq 1) 'update feed uses supported schema'
+    Assert ($feed.version -eq $script:BobVersion) 'update feed matches installer version'
+    Assert ($feed.sha256 -eq $script:BobHash) 'update feed matches pinned package hash'
     # Verify the actual distributable independently of mocked download fixtures.
     Assert-BobPackage (Join-Path $root "packages/$script:BobFile") $originalHash
     Assert $true 'actual release package hash and archive paths valid'
@@ -33,7 +37,7 @@ try {
     function Invoke-WebRequest {
         param([switch]$UseBasicParsing,$Uri,$OutFile,$TimeoutSec)
         $script:downloads++; $script:downloadPath=$OutFile
-        Assert ($Uri -eq 'https://github.com/amhsekol/ai-rg-bob-installer/releases/download/v3.0.0/RG-AI-Assistant-Revit2024-2025-2026-v3.0.0.zip') 'download stays on exact public release URL'
+        Assert ($Uri -eq 'https://github.com/amhsekol/ai-rg-bob-installer/releases/download/v3.0.1/RG-AI-Assistant-Revit2024-2025-2026-v3.0.1.zip') 'download stays on exact public release URL'
         if ($script:networkFailure) { throw 'Simulated network failure' }
         Copy-Item $script:fixtureZip $OutFile
     }

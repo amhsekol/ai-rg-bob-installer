@@ -1,0 +1,6 @@
+{
+  "schema": 1,
+  "version": "3.0.1",
+  "sha256": "ca38503d875209a8bf24b3bfc490af04d389d2e7fa3ff477d1f153230f4c4843",
+  "notes": "Adds Check for updates, daily in-panel update notifications with an opt-out, and an approved updater that waits for all Revit windows to close. Preserves chats, skills and Claude settings. Includes Maximize, Full screen and animated activity. Unsigned build; test on model copies."
+}
