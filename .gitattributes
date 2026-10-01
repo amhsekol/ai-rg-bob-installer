@@ -1,0 +1,8 @@
+# Bootstrap hashes must cover identical bytes on Windows and Linux.
+*.ps1 text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.txt text eol=lf
+*.zip binary
+*.png binary
