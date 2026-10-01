@@ -13,10 +13,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Windows PowerShell 5.1
         shell: powershell
-        run: ./tests/Test-Installer.ps1
+        run: |
+          ./tests/Test-Installer.ps1
+          ./tests/Test-Setup.ps1
       - name: PowerShell 7
         shell: pwsh
-        run: ./tests/Test-Installer.ps1
+        run: |
+          ./tests/Test-Installer.ps1
+          ./tests/Test-Setup.ps1
   publish:
     needs: verify
     runs-on: ubuntu-latest
@@ -43,6 +47,9 @@ jobs:
               --target "$GITHUB_SHA" --latest --title "AI RG: Bob $version" \
               --notes-file RELEASE-NOTES.md
           fi
+          # Setup is a distribution convenience; the versioned add-in ZIP is unchanged.
+          gh release upload "v$version" Setup-Bob.ps1 --clobber
+          gh release edit "v$version" --notes-file RELEASE-NOTES.md
           # No token is sent in these verification requests.
           curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/download/v$version/$asset" --output anonymous-download.zip
           echo "$digest  anonymous-download.zip" | sha256sum -c -
@@ -50,3 +57,7 @@ jobs:
           cmp Install-Bob.ps1 anonymous-installer.ps1
           curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/latest/download/update.json" --output anonymous-update.json
           cmp update.json anonymous-update.json
+          curl --fail --location --retry 3 "https://raw.githubusercontent.com/$GH_REPO/main/Setup-Bob.ps1" --output anonymous-setup.ps1
+          cmp Setup-Bob.ps1 anonymous-setup.ps1
+          curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/download/v$version/Setup-Bob.ps1" --output release-setup.ps1
+          cmp Setup-Bob.ps1 release-setup.ps1

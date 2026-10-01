@@ -7,16 +7,24 @@ Public installer distribution for Bob 3.1.0, supporting Revit 2024, 2025 and 202
 Save your work and **close every Revit window**. Open PowerShell as your usual Windows user and paste this line, then press Enter:
 
 ```powershell
-irm 'https://raw.githubusercontent.com/amhsekol/ai-rg-bob-installer/main/Install-Bob.ps1' | iex
+irm 'https://raw.githubusercontent.com/amhsekol/ai-rg-bob-installer/main/Setup-Bob.ps1' | iex
 ```
 
-No GitHub account, GitHub CLI or GitHub sign-in is required. The script downloads the tested package, verifies SHA-256, extracts temporarily, installs matching per-year add-ins with backups and removes temporary files. No manual ZIP handling is needed.
+No GitHub account, GitHub CLI or GitHub sign-in is required. This all-in-one command finds Claude Code or installs the official `Anthropic.ClaudeCode` package through winget, reuses a confirmed eligible Claude sign-in or starts official browser sign-in, installs Bob and configures its executable path. It verifies the downloaded Bob installer and package, makes installation backups and removes temporary downloads. No manual ZIP handling or path copying is needed.
 
-This command executes the installation script published in this repository. Review `Install-Bob.ps1` if you prefer to inspect it first. Company policies may require IT approval; do not bypass organizational restrictions.
+Each person still completes their own browser sign-in and approves company/project-data sharing in Bob's AI Settings. New installs do not automatically enable cloud sharing, advanced generated-code execution or local chat saving. Existing settings are preserved; a changed settings file is backed up before its path is updated.
+
+This command executes the setup script published in this repository. Review `Setup-Bob.ps1` and `Install-Bob.ps1` if you prefer to inspect them first. If winget is missing or execution is blocked, ask IT; do not bypass organizational restrictions. An eligible Claude subscription or organization-assigned access is required.
 
 The installer targets all three supported years by default. It does not install Revit itself, close Revit forcibly, install a Windows service or silently run future updates.
 
 After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.1.0**. Existing users keep their Claude settings and sign-in.
+
+For add-in-only installation, without installing/signing into Claude or configuring its path, the previous command remains available:
+
+```powershell
+irm 'https://raw.githubusercontent.com/amhsekol/ai-rg-bob-installer/main/Install-Bob.ps1' | iex
+```
 
 ## Colorful neumorphic workspace
 
