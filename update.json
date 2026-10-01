@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "3.0.1",
-  "sha256": "ca38503d875209a8bf24b3bfc490af04d389d2e7fa3ff477d1f153230f4c4843",
-  "notes": "Adds Check for updates, daily in-panel update notifications with an opt-out, and an approved updater that waits for all Revit windows to close. Preserves chats, skills and Claude settings. Includes Maximize, Full screen and animated activity. Unsigned build; test on model copies."
+  "version": "3.1.0",
+  "sha256": "1f5c36de7b8865c63ebc182e483982ad1eb92521124caaf7a6652519c94cfa4f",
+  "notes": "Colorful neumorphic workspace: raised rounded controls, inset inputs, lavender/mint/blue/amber accents, shared dialog styling, larger chat text and compact expandable model context. Retains Maximize, Full screen, chats, skills, attachments, supported exports/imports, safety approvals and in-app updates. Unsigned build; test on model copies."
 }

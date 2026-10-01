@@ -1,6 +1,6 @@
 # AI RG: Bob for Revit
 
-Public installer distribution for Bob 3.0.1, supporting Revit 2024, 2025 and 2026 on Windows. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
+Public installer distribution for Bob 3.1.0, supporting Revit 2024, 2025 and 2026 on Windows. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
 
 ## Install with one command
 
@@ -16,7 +16,21 @@ This command executes the installation script published in this repository. Revi
 
 The installer targets all three supported years by default. It does not install Revit itself, close Revit forcibly, install a Windows service or silently run future updates.
 
-After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.0.1**. Existing users keep their Claude settings and sign-in.
+After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.1.0**. Existing users keep their Claude settings and sign-in.
+
+## Colorful neumorphic workspace
+
+Bob 3.1.0 adds softly raised rounded buttons, inset input fields, layered conversation cards and a shared visual theme across chat, settings, chats, skills, files, updates and code review. Lavender marks conversation tools, blue marks skills/view capture, mint marks files/data, and amber marks updates/review. Every action retains its text label; color is not the sole indicator.
+
+The release retains all previously shipped features and safety gates. Body messages use 16-pixel text, keyboard focus has a visible ring, and Windows high-contrast colors are used for the core palette at startup with decorative shadows disabled. Activity animations continue to respect Windows motion preferences.
+
+The toolbar wraps compactly in a narrow dock. **Model context** expands to show the last-send model/view/selection snapshot, leaving more space for the conversation.
+
+Native Windows test-harness screenshots are included with the release. They use simulated model/provider data and are not evidence of a live Revit session.
+
+![Bob 3.1 colorful neumorphic chat, native Windows test](screenshots/Bob-3.1-Neumorphic-Chat.png)
+
+[Full-screen workspace screenshot](screenshots/Bob-3.1-Full-Screen.png)
 
 ## Future updates inside Bob
 
@@ -76,7 +90,7 @@ The package includes `START-HERE.md`, `UI-VERIFICATION.md`, per-year build manif
 The current ZIP SHA-256 is:
 
 ```text
-ca38503d875209a8bf24b3bfc490af04d389d2e7fa3ff477d1f153230f4c4843
+1f5c36de7b8865c63ebc182e483982ad1eb92521124caaf7a6652519c94cfa4f
 ```
 
 The public installer workflow tests Windows PowerShell 5.1 and PowerShell 7, checks the package hash and rejects unsafe archive paths before publishing a release. Automated checks do not replace live testing inside Revit.

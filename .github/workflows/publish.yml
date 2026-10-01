@@ -39,7 +39,7 @@ jobs:
           if gh release view "v$version" --json assets > release.json 2>/dev/null; then
             test "$(jq -r --arg name "$asset" '.assets[]|select(.name==$name)|.digest' release.json)" = "sha256:$digest"
           else
-            gh release create "v$version" "packages/$asset" SHA256SUMS.txt update.json \
+            gh release create "v$version" "packages/$asset" SHA256SUMS.txt update.json screenshots/*.png \
               --target "$GITHUB_SHA" --latest --title "AI RG: Bob $version" \
               --notes-file RELEASE-NOTES.md
           fi
