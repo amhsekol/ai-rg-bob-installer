@@ -5,6 +5,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: bob-public-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   verify:
     runs-on: windows-latest
@@ -23,6 +26,7 @@ jobs:
           ./tests/Test-Setup.ps1
   publish:
     needs: verify
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -33,9 +37,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
+          PROMOTE_LATEST: ${{ github.ref == 'refs/heads/main' }}
         shell: bash
         run: |
           set -euo pipefail
+          test "$GH_REPO" = "amhsekol/ai-rg-bob-installer"
+          test "$(gh api "repos/$GH_REPO" --jq .private)" = false
           version="$(jq -er '.version' update.json)"
           asset="RG-AI-Assistant-Revit2024-2025-2026-v$version.zip"
           digest="$(jq -er '.sha256' update.json)"
@@ -44,20 +51,36 @@ jobs:
             test "$(jq -r --arg name "$asset" '.assets[]|select(.name==$name)|.digest' release.json)" = "sha256:$digest"
           else
             gh release create "v$version" "packages/$asset" SHA256SUMS.txt update.json screenshots/*.png \
-              --target "$GITHUB_SHA" --latest --title "AI RG: Bob $version" \
+              --target "$GITHUB_SHA" --latest=false --title "AI RG: Bob $version" \
               --notes-file RELEASE-NOTES.md
           fi
-          # Setup is a distribution convenience; the versioned add-in ZIP is unchanged.
-          gh release upload "v$version" Setup-Bob.ps1 --clobber
+          # Do not overwrite a different bootstrap on an existing version.
+          gh release view "v$version" --json assets > release.json
+          setup_digest="$(sha256sum Setup-Bob.ps1 | cut -d' ' -f1)"
+          existing_setup="$(jq -r '.assets[]|select(.name=="Setup-Bob.ps1")|.digest' release.json)"
+          if [ -z "$existing_setup" ]; then
+            gh release upload "v$version" Setup-Bob.ps1
+          else
+            test "$existing_setup" = "sha256:$setup_digest"
+          fi
           gh release edit "v$version" --notes-file RELEASE-NOTES.md
           # No token is sent in these verification requests.
           curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/download/v$version/$asset" --output anonymous-download.zip
           echo "$digest  anonymous-download.zip" | sha256sum -c -
+          curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/download/v$version/update.json" --output staged-update.json
+          cmp update.json staged-update.json
+          curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/download/v$version/Setup-Bob.ps1" --output release-setup.ps1
+          cmp Setup-Bob.ps1 release-setup.ps1
+          # Stage the versioned download before switching main's one-line installer.
+          # Only main promotes the in-app latest feed.
+          if [ "$PROMOTE_LATEST" != true ]; then
+            echo "Versioned download verified. Main installer and latest feed unchanged."
+            exit 0
+          fi
+          gh release edit "v$version" --latest
           curl --fail --location --retry 3 "https://raw.githubusercontent.com/$GH_REPO/main/Install-Bob.ps1" --output anonymous-installer.ps1
           cmp Install-Bob.ps1 anonymous-installer.ps1
           curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/latest/download/update.json" --output anonymous-update.json
           cmp update.json anonymous-update.json
           curl --fail --location --retry 3 "https://raw.githubusercontent.com/$GH_REPO/main/Setup-Bob.ps1" --output anonymous-setup.ps1
           cmp Setup-Bob.ps1 anonymous-setup.ps1
-          curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/download/v$version/Setup-Bob.ps1" --output release-setup.ps1
-          cmp Setup-Bob.ps1 release-setup.ps1

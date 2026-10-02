@@ -1,31 +1,69 @@
-# Bob 3.1.0: Colorful Neumorphic Workspace
+# Bob 3.2.0: Private Skill Review Submissions
 
-Installer-only public distribution for Revit 2024, 2025 and 2026. No GitHub login is needed to download or run the public installation script.
+Public installer distribution for Windows Revit 2024, 2025 and 2026.
+Anyone can install Bob without GitHub sign-in or manual ZIP extraction.
 
-## All-in-one first-time setup
+## One installation command
 
-Close every Revit window, open PowerShell as your normal Windows user and run:
+Save your models, close every Revit window, open PowerShell as your usual Windows
+user and run:
 
 ```powershell
 irm 'https://raw.githubusercontent.com/amhsekol/ai-rg-bob-installer/main/Setup-Bob.ps1' | iex
 ```
 
-This installs Claude Code if missing, starts official subscription sign-in when needed, installs Bob and configures the executable path. Each user still completes browser sign-in and approves project-data sharing in Bob. No credentials are copied or saved by the setup script. Existing preferences are preserved and settings changes are backed up. This adds a setup convenience; the tested 3.1.0 add-in ZIP and its checksum are unchanged.
+Setup installs official Claude Code if missing, starts its official browser
+sign-in when needed, installs Bob and configures the executable path.
+Each user needs their own eligible Claude access and must approve project-data
+sharing in Bob. New installations do not automatically enable cloud sharing,
+advanced generated code or local chat saving. Company policies still apply.
 
-## Workspace changes
+The command uses main's promoted version. A versioned package can be staged on
+this release before main and the in-app latest feed are switched.
 
-Adds a colorful neumorphic interface across Bob: softly raised rounded controls, inset text fields, lavender conversation cards, blue skills/view controls, mint file/data controls and amber update/review states. The same theme covers settings, chat and skill libraries, file workflows, updates and code review.
+## New skill submission workflow
 
-Readability remains functional: 16-pixel chat text, explicit labels, visible keyboard focus, pressed/disabled states, existing tooltips, verified text-color contrast pairs and a core high-contrast startup palette. Screenshots are from native Windows UI tests using simulated model/provider data, not live Revit.
+- Select a skill in **Skills → Submit for approval**.
+- Check GitHub access and inspect the exact name, instructions, version and input names.
+- Confirm the privacy review and submit directly to the private RG Construction queue.
+- Follow visible progress, cancel waiting, check the saved receipt or open the queue.
+- Repeated clicks reuse a receipt; uncertain outcomes do not automatically retry.
 
-Existing functionality remains included: Maximize/Full screen, activity feedback, direct clarification answers, attachments, local chats and skills, supported PDF/Excel exports/imports, and approved in-app updates. This is a visual release, not an expansion of previously unsupported workflows.
+Only the chosen skill and review metadata are submitted. Chats, attachments,
+project labels, model snapshots and local Reviewed flags are not automatically
+uploaded. Instructions themselves can contain confidential data: review them first.
 
-The updater rechecks SHA-256 and archive paths, refuses installation while Revit is running, invokes the existing backup/rollback installer, and records success or failure. It uses Windows PowerShell internally and is subject to company execution policy. Offline checks remain recoverable. The initial upgrade from 3.0.0 needs one last use of the public installer command.
+## Private access and unfinished features
 
-Retains the animated activity card, elapsed time, queued-work Stop, local chats, instruction skills, references, reports, bounded exports and guarded text-parameter/RFA import workflows. Close Revit before installing; backups and existing Claude settings are preserved.
+**The installer is public; RG Construction skills are private.**
+The skills repository remains owner-only. The optional submission feature requires
+separate official GitHub CLI sign-in and authorized access; it does not borrow
+Claude SSO, invite teammates or grant permissions.
 
-Unsigned build: test on model copies. Each user still needs their own Claude sign-in and project-data permission. Team libraries are local; no OCR, numeric/type parameter round trips or dedicated RVT/IFC/DWG linking.
+Reviewer-controlled publishing, approved-library synchronization and teammate
+access onboarding are not included. A submitted or closed issue is never approval.
+Every Revit model change still needs its separate approval.
 
-The ZIP is the tested 3.1.0 package. It contains compiled add-ins, installers, documentation, build manifests and dependency notices; it does not include private source history or user data. Native Revit UI-thread operations can pause animation; live Revit acceptance is still required.
+## Existing workspace retained
 
-See README for the single-command installation and first-time Claude setup.
+Colorful neumorphic controls, Maximize/Full screen, visible activity and Stop,
+direct clickable clarification answers, attachments, saved local chats/skills,
+supported PDF/Excel exports and guarded text-parameter/RFA imports remain included.
+Project/Team libraries are still local labels. No OCR, numeric/type-parameter
+round trips or dedicated RVT/IFC/DWG imports are added.
+
+## Tests and recovery
+
+The add-in has Windows builds for all three Revit years, automated safety and
+submission tests, and native WPF tests on .NET Framework 4.8 and .NET 8.
+Submission tests use synthetic GitHub responses; live sign-in, real issue posting,
+and live Revit acceptance are not certified by these tests.
+
+The public bootstrap is tested on Windows PowerShell 5.1 and PowerShell 7.
+Downloads and per-year payloads are hash checked. The installer refuses to run
+while Revit is open and retains per-version backups. Existing settings, chats,
+skills and Claude sign-in are preserved. Keep the printed backup path.
+
+Bob 3.1.0 remains available as the prior release. This is an unsigned build:
+test on model copies before production use. A release is not proof that it has
+been installed on any workstation.

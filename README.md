@@ -1,6 +1,6 @@
 # AI RG: Bob for Revit
 
-Public installer distribution for Bob 3.1.0, supporting Revit 2024, 2025 and 2026 on Windows. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
+Public installer distribution for Bob 3.2.0, supporting Revit 2024, 2025 and 2026 on Windows. Anyone may download and install it without a GitHub account. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
 
 ## Install with one command
 
@@ -18,13 +18,35 @@ This command executes the setup script published in this repository. Review `Set
 
 The installer targets all three supported years by default. It does not install Revit itself, close Revit forcibly, install a Windows service or silently run future updates.
 
-After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.1.0**. Existing users keep their Claude settings and sign-in.
+After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.2.0**. Existing users keep their Claude settings and sign-in.
 
 For add-in-only installation, without installing/signing into Claude or configuring its path, the previous command remains available:
 
 ```powershell
 irm 'https://raw.githubusercontent.com/amhsekol/ai-rg-bob-installer/main/Install-Bob.ps1' | iex
 ```
+
+## New in 3.2.0: submit a skill for review
+
+In **Skills**, select a recipe and choose **Submit for approval**. The dialog shows
+the exact selected skill, verifies the private RG Construction review repository,
+asks for explicit consent and sends a review issue without rewriting the chat
+composer. It includes visible progress, cancellation, status checks and persistent
+receipts to prevent duplicate sends after ambiguous network failures.
+
+**Public installation is separate from private skills access.** The RG skills
+repository currently has owner-only access. The optional submission feature needs
+the user's own official GitHub CLI sign-in and authorized private repository access.
+Installing Bob grants neither. Everyone can still use Bob's other features with
+their own supported Revit installation and eligible Claude connection.
+
+This release does **not** implement reviewer-controlled publishing, automatic
+approved-library sync or teammate access onboarding. Submissions, closed issues
+and local Reviewed flags never approve publication or model changes.
+Chats, attachments, project labels and model snapshots are not automatically sent
+with a skill; users must remove any sensitive information from its instructions.
+
+![Bob 3.2 skill submission dialog, synthetic native Windows UI test](screenshots/Bob-3.2-Skill-Submission.png)
 
 ## Colorful neumorphic workspace
 
@@ -74,7 +96,7 @@ Use your own account in the official sign-in flow. In Bob's **AI Settings**, set
 - **Workspace:** Visible Maximize opens a maximized window in one click. Full screen removes window chrome; F11 toggles it and Esc exits full screen without cancelling work. Return to dock preserves the same chat, draft and request. Read-only result tables, tooltips and direct Continue for clarification choices remain available.
 - **Visible activity:** Prominent working card, moving activity bar, staggered pulse dots, actual stage labels, elapsed time and queued-work Stop. Approval waiting, completion and errors are distinct states. No invented percentages or pretend activity while idle.
 - **Chats:** New/previous conversations, search, rename, pin, archive and safe resume. Disk history is opt-in in Chats.
-- **Skills:** Built-in and personal instruction recipes, editable inputs, versions and reviewed imports. Project/Team collections are local, not cloud-synchronized.
+- **Skills:** Built-in and personal instruction recipes, editable inputs, versions, reviewed imports and optional private review submissions. Project/Team collections are local, not cloud-synchronized; publishing controls are not included.
 - **References:** Text, selected PDF text pages, selected XLSX worksheets and PNG/JPG previews; view capture. No scanned-PDF OCR.
 - **Exports:** Chat PDF/Markdown/XLSX, bounded host-view inventories, parameter templates and drawing PDFs.
 - **Imports:** Same-open-session writable text instance parameters and separately approved RFA loading. Numeric/type parameters and dedicated RVT/IFC/DWG imports are not supported.
@@ -98,7 +120,7 @@ The package includes `START-HERE.md`, `UI-VERIFICATION.md`, per-year build manif
 The current ZIP SHA-256 is:
 
 ```text
-1f5c36de7b8865c63ebc182e483982ad1eb92521124caaf7a6652519c94cfa4f
+28b11a528d22efdda7f1881422e9feb2bf4b2875ec28c3137af227a458cf2bfa
 ```
 
 The public installer workflow tests Windows PowerShell 5.1 and PowerShell 7, checks the package hash and rejects unsafe archive paths before publishing a release. Automated checks do not replace live testing inside Revit.
