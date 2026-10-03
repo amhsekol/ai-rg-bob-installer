@@ -1,6 +1,6 @@
 # AI RG: Bob for Revit
 
-Public installer distribution for Bob 3.2.0, supporting Revit 2024, 2025 and 2026 on Windows. Anyone may download and install it without a GitHub account. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
+Public installer distribution for Bob 3.2.1, supporting Revit 2024, 2025 and 2026 on Windows. Anyone may download and install it without a GitHub account. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
 
 ## Install with one command
 
@@ -18,7 +18,7 @@ This command executes the setup script published in this repository. Review `Set
 
 The installer targets all three supported years by default. It does not install Revit itself, close Revit forcibly, install a Windows service or silently run future updates.
 
-After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.2.0**. Existing users keep their Claude settings and sign-in.
+After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.2.1**. Existing users keep their Claude settings and sign-in.
 
 For add-in-only installation, without installing/signing into Claude or configuring its path, the previous command remains available:
 
@@ -26,7 +26,34 @@ For add-in-only installation, without installing/signing into Claude or configur
 irm 'https://raw.githubusercontent.com/amhsekol/ai-rg-bob-installer/main/Install-Bob.ps1' | iex
 ```
 
-## New in 3.2.0: submit a skill for review
+## New in 3.2.1: workspace size and installer fix
+
+Choose **Size 100%** in Bob's header to scale text, buttons, tables, message cards
+and spacing together. Preview 75–150% with the slider or use **Compact 75%**,
+**Comfortable 85%**, **Default 100%** or **Large 125%**.
+Choose **Save size** to remember it for your Windows user, or **Cancel** to restore
+the previous size. Other dialogs remain at their normal scale so recovery
+controls stay readable.
+
+While Bob has focus, **Ctrl+plus/minus** or **Ctrl+mouse wheel** adjusts and saves
+the size in 5% steps; **Ctrl+0** resets to 100%. The same workspace retains its
+scale when maximized, full screen and returned to dock. This changes neither
+Windows scaling nor the Revit model view. Display-only saving preserves current
+on-disk consent, execution permissions and other preferences.
+
+The installer now ignores content directories ending in `.Addin`, including the
+Autodesk BIM 360 Issues folder that could trigger the earlier `Get-Content`
+access-denied failure. Actual manifest files are still checked for conflicts.
+Genuinely unreadable files or folders stop installation safely; the installer
+does not elevate permissions, delete Autodesk files or alter their ACLs.
+
+Native Windows fixture screenshots, not a live Revit session:
+
+![Bob workspace at Compact 75%](screenshots/Bob-3.2.1-Compact-75.png)
+
+[Default 100% comparison](screenshots/Bob-3.2.1-Default-100.png)
+
+## Retained from 3.2.0: submit a skill for review
 
 In **Skills**, select a recipe and choose **Submit for approval**. The dialog shows
 the exact selected skill, verifies the private RG Construction review repository,
@@ -120,7 +147,7 @@ The package includes `START-HERE.md`, `UI-VERIFICATION.md`, per-year build manif
 The current ZIP SHA-256 is:
 
 ```text
-28b11a528d22efdda7f1881422e9feb2bf4b2875ec28c3137af227a458cf2bfa
+1a9284d3c65c548d7c1f8b7e9edb5450b27273f0a5de55d35f8a310944326ffd
 ```
 
 The public installer workflow tests Windows PowerShell 5.1 and PowerShell 7, checks the package hash and rejects unsafe archive paths before publishing a release. Automated checks do not replace live testing inside Revit.

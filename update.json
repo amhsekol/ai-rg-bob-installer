@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "3.2.0",
-  "sha256": "28b11a528d22efdda7f1881422e9feb2bf4b2875ec28c3137af227a458cf2bfa",
-  "notes": "Adds Skills > Submit for approval: exact payload preview, separate GitHub access check, private RG review requests, visible progress and duplicate-safe receipts. Public installation needs no GitHub login; private submissions require authorized access and the skills repository remains owner-only. Publishing controls and team sync are not included. Retains all existing workspace features and model approvals. Unsigned build; test on model copies."
+  "version": "3.2.1",
+  "sha256": "1a9284d3c65c548d7c1f8b7e9edb5450b27273f0a5de55d35f8a310944326ffd",
+  "notes": "Adds Size 100% in Bob's header: saved 75–150% scaling of text, controls, tables and spacing, compact presets, live preview, Save/Cancel and keyboard reset. Fixes the installer treating Autodesk folders ending .Addin as files; genuine manifest-access failures still stop safely. Existing approvals and backups remain. Private team publishing and approved-skill sync are not included. Close all Revit windows before installation. Unsigned build; test on model copies."
 }
