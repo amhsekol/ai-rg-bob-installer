@@ -37,7 +37,7 @@ try {
     function Invoke-WebRequest {
         param([switch]$UseBasicParsing,$Uri,$OutFile,$TimeoutSec)
         $script:downloads++; $script:downloadPath=$OutFile
-        Assert ($Uri -eq 'https://github.com/amhsekol/ai-rg-bob-installer/releases/download/v3.2.1/RG-AI-Assistant-Revit2024-2025-2026-v3.2.1.zip') 'download stays on exact public release URL'
+        Assert ($Uri -eq 'https://github.com/amhsekol/ai-rg-bob-installer/releases/download/v3.3.0/RG-AI-Assistant-Revit2024-2025-2026-v3.3.0.zip') 'download stays on exact public release URL'
         if ($script:networkFailure) { throw 'Simulated network failure' }
         Copy-Item $script:fixtureZip $OutFile
     }

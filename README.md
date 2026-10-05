@@ -1,6 +1,6 @@
 # AI RG: Bob for Revit
 
-Public installer distribution for Bob 3.2.1, supporting Revit 2024, 2025 and 2026 on Windows. Anyone may download and install it without a GitHub account. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
+Public installer distribution for Bob 3.3.0, supporting Revit 2024, 2025 and 2026 on Windows. Anyone may download and install it without a GitHub account. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
 
 ## Install with one command
 
@@ -18,7 +18,7 @@ This command executes the setup script published in this repository. Review `Set
 
 The installer targets all three supported years by default. It does not install Revit itself, close Revit forcibly, install a Windows service or silently run future updates.
 
-After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.2.1**. Existing users keep their Claude settings and sign-in.
+After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.3.0**. Existing users keep their Claude settings and sign-in.
 
 For add-in-only installation, without installing/signing into Claude or configuring its path, the previous command remains available:
 
@@ -26,7 +26,30 @@ For add-in-only installation, without installing/signing into Claude or configur
 irm 'https://raw.githubusercontent.com/amhsekol/ai-rg-bob-installer/main/Install-Bob.ps1' | iex
 ```
 
-## New in 3.2.1: workspace size and installer fix
+## New in 3.3.0: fewer questions, section boxes, filters and project info
+
+Bob restates each request in Revit terms (**Understood as: ...**), uses your
+selection, active view and its level as defaults, and asks at most one question,
+only when a wrong guess would change, delete or export the wrong thing.
+
+- **Compact layout:** one row of tools (mouse wheel scrolls it), a slim progress
+  strip and a larger chat area; sharper text at every size, including 75%.
+
+  ![Bob 3.3.0 compact layout in a narrow dock](screenshots/Bob-3.3.0-Compact-340.png)
+- **Run Revit operations without asking** (AI Settings, on by default): model
+  changes, exports, family loads and enabled advanced code run without approval
+  dialogs. Untick it to approve each action. Revit Undo still reverses changes.
+- **Auto model choice:** the model dropdown lists what your installed Claude Code
+  accepts; **auto** picks haiku, sonnet or opus per task and never picks fable.
+- **Section boxes by search:** box everything matching a category, level,
+  parameter or phase, in the host model or a linked model.
+- **View filters:** color, halftone or hide by a parameter rule.
+- **Project info:** per-project notes such as where to save NWC/Navisworks files;
+  Bob answers from them. Use a shared folder for the whole team.
+- **Capture Revit** captures the whole window including Properties and Project
+  Browser; **Dictate** uses Windows voice typing.
+
+## Retained from 3.2.1: workspace size and installer fix
 
 Choose **Size 100%** in Bob's header to scale text, buttons, tables, message cards
 and spacing together. Preview 75–150% with the slider or use **Compact 75%**,
@@ -128,7 +151,7 @@ Use your own account in the official sign-in flow. In Bob's **AI Settings**, set
 - **Exports:** Chat PDF/Markdown/XLSX, bounded host-view inventories, parameter templates and drawing PDFs.
 - **Imports:** Same-open-session writable text instance parameters and separately approved RFA loading. Numeric/type parameters and dedicated RVT/IFC/DWG imports are not supported.
 
-This is an **unsigned build**, not production certification. Real Revit behavior and the user's Claude connection need testing on model copies. Model changes require approval. Advanced generated code, if explicitly enabled, is full-trust and not sandboxed.
+This is an **unsigned build**, not production certification. Real Revit behavior and the user's Claude connection need testing on model copies. Model changes run without approval dialogs while Run Revit operations without asking is on (the default); untick it in AI Settings to approve each change. Advanced generated code, if explicitly enabled, is full-trust and not sandboxed.
 
 Activity animation respects Windows reduced-motion settings. Native Revit operations that occupy its UI thread can temporarily pause the display; an animation is not a guarantee that Revit is responsive. Elapsed time includes provider and approval waiting, not an estimate of time remaining.
 
@@ -147,7 +170,7 @@ The package includes `START-HERE.md`, `UI-VERIFICATION.md`, per-year build manif
 The current ZIP SHA-256 is:
 
 ```text
-1a9284d3c65c548d7c1f8b7e9edb5450b27273f0a5de55d35f8a310944326ffd
+69beab35ff4a66627f2ad681d502615a58a3c6d4cb87e75d26a6e73556d15b89
 ```
 
 The public installer workflow tests Windows PowerShell 5.1 and PowerShell 7, checks the package hash and rejects unsafe archive paths before publishing a release. Automated checks do not replace live testing inside Revit.

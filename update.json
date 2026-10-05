@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "3.2.1",
-  "sha256": "1a9284d3c65c548d7c1f8b7e9edb5450b27273f0a5de55d35f8a310944326ffd",
-  "notes": "Adds Size 100% in Bob's header: saved 75–150% scaling of text, controls, tables and spacing, compact presets, live preview, Save/Cancel and keyboard reset. Fixes the installer treating Autodesk folders ending .Addin as files; genuine manifest-access failures still stop safely. Existing approvals and backups remain. Private team publishing and approved-skill sync are not included. Close all Revit windows before installation. Unsigned build; test on model copies."
+  "version": "3.3.0",
+  "sha256": "69beab35ff4a66627f2ad681d502615a58a3c6d4cb87e75d26a6e73556d15b89",
+  "notes": "Compact layout: one-row toolbar, slim progress strip, larger chat and sharper text. Bob restates requests in Revit terms and acts with fewer questions. Run Revit operations without asking (on by default; untick in AI Settings to approve each action). Auto model choice from your installed Claude Code. Find elements and section boxes by category, level, parameter or phase, including in linked models. Color/halftone/hide view filters. Project info answers (e.g. where to save NWC). Whole-window Revit capture and dictation. Close all Revit windows before installation. Unsigned build; test on model copies."
 }

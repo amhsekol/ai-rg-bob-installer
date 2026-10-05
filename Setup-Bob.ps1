@@ -1,6 +1,6 @@
 # One-command first-time setup. Browser sign-in and project-data permission remain personal.
 $ErrorActionPreference = 'Stop'
-$script:BobSetupInstallerHash = '1e6c47bb3493b9beee876448a5481f1bd838611492b35e7efa6e7ec9df7ec844'
+$script:BobSetupInstallerHash = '5427a65bae92ae407f1352bfe99b32535fa7654487a322515f4701eb15358b34'
 
 function Assert-BobSetupClosed {
     if ($env:OS -ne 'Windows_NT') { throw 'Bob requires Windows and Revit 2024, 2025 or 2026.' }
@@ -63,7 +63,7 @@ function Start-BobClaudeLogin {
 function Read-BobSetupSettings {
     $path = Join-Path $env:LOCALAPPDATA 'RGConstruction\RevitAI\settings.json'
     if (-not (Test-Path -LiteralPath $path)) {
-        return [pscustomobject]@{Model='sonnet'; CloudConsent=$false; AllowAdvancedRevitCode=$false; SaveLocalHistory=$false; AutomaticUpdateChecks=$true; ClaudePath=''}
+        return [pscustomobject]@{Model='auto'; CloudConsent=$false; AllowAdvancedRevitCode=$false; SaveLocalHistory=$false; AutomaticUpdateChecks=$true; ClaudePath=''}
     }
     try {
         $raw = Get-Content -LiteralPath $path -Raw
