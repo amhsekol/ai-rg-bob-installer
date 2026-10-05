@@ -1,6 +1,6 @@
 # AI RG: Bob for Revit
 
-Public installer distribution for Bob 3.3.0, supporting Revit 2024, 2025 and 2026 on Windows. Anyone may download and install it without a GitHub account. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
+Public installer distribution for Bob 3.4.0, supporting Revit 2024, 2025 and 2026 on Windows. Anyone may download and install it without a GitHub account. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
 
 ## Install with one command
 
@@ -18,7 +18,7 @@ This command executes the setup script published in this repository. Review `Set
 
 The installer targets all three supported years by default. It does not install Revit itself, close Revit forcibly, install a Windows service or silently run future updates.
 
-After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.3.0**. Existing users keep their Claude settings and sign-in.
+After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.4.0**. Existing users keep their Claude settings and sign-in.
 
 For add-in-only installation, without installing/signing into Claude or configuring its path, the previous command remains available:
 
@@ -26,7 +26,26 @@ For add-in-only installation, without installing/signing into Claude or configur
 irm 'https://raw.githubusercontent.com/amhsekol/ai-rg-bob-installer/main/Install-Bob.ps1' | iex
 ```
 
-## New in 3.3.0: fewer questions, section boxes, filters and project info
+## New in 3.4.0: model locations, NWC export set once, markup
+
+- **Where models live:** **Files > Models** lists each project's models and where
+  they are hosted (Forma cloud model or folder), with **Open**. Bob records this
+  automatically when anyone opens a model. From an empty Revit, ask "open
+  ROXX22CO212 arch model".
+- **NWC export, set once for everyone:** **Files > NWC export** lists every 3D view
+  with NWC in its name. Give each an NWC file name and **Choose location** in your
+  Autodesk Forma folders (Desktop Connector); **Add location** for extra copies.
+  **Save** stores it in the model, so after Sync with Central every user has it.
+  Then ask "update the NWCs". Re-exports replace the files, so Forma gets new versions.
+
+  ![Bob 3.4.0 NWC export setup](screenshots/Bob-3.4.0-Chat-340.png)
+- **Team folder:** create a folder named **Bob Team** in a Forma project (under
+  Project Files); every user then shares Project info and model locations.
+- **Markup before sending:** arrows, boxes, circles, pen, highlighter, text and
+  leader notes on captures. **Enter** sends (Shift+Enter for a new line); toolbar
+  arrows, icons and hover explanations on most buttons.
+
+## Earlier in 3.3.0: fewer questions, section boxes, filters and project info
 
 Bob restates each request in Revit terms (**Understood as: ...**), uses your
 selection, active view and its level as defaults, and asks at most one question,

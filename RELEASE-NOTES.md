@@ -1,3 +1,12 @@
+# Bob 3.4.0: Model Locations, NWC Export Set Once, Markup
+
+- **Where models live.** Files > Models shows every project's models and where they are hosted (Forma cloud model or folder), with Open. Bob records locations automatically whenever someone opens a model with Bob. From an empty Revit, ask "open <project> <model>" and Bob opens it (cloud models from Forma; central files as a new local copy).
+- **NWC export, set once for everyone.** For each 3D view with NWC in its name: an NWC file name and one or more locations picked from Autodesk Forma (Desktop Connector). Saved inside the model; Sync with Central shares it with every user. Forma locations are stored relative to Forma, so they resolve to each user's own Desktop Connector folder. "Update the NWCs" exports each view and replaces its files, so Forma gets new versions. Needs the free Navisworks NWC Export Utility.
+- **Team folder.** A folder named "Bob Team" in any Forma project (Project Files) is found automatically and holds shared Project info and model locations. AI Settings > Team folder can point elsewhere.
+- **Markup before sending.** Arrows, boxes, circles, pen, highlighter, text and leader notes on captured or attached images, with undo.
+- **Faster input.** Enter sends, Shift+Enter adds a line. Toolbar arrows; New chat and AI Settings stay visible; icons and tooltips on most buttons. Simpler Files window.
+- Close all Revit windows before installation. Unsigned build: test on model copies. Existing settings are kept.
+
 # Bob 3.3.0: Fewer Questions, Section Boxes, Filters and Project Info
 
 - **Compact layout.** Tools in one row (mouse wheel scrolls it), a slim progress strip and a much larger chat area. Sharper text at every size, including 75%.

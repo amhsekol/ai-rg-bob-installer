@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "3.3.0",
-  "sha256": "69beab35ff4a66627f2ad681d502615a58a3c6d4cb87e75d26a6e73556d15b89",
-  "notes": "Compact layout: one-row toolbar, slim progress strip, larger chat and sharper text. Bob restates requests in Revit terms and acts with fewer questions. Run Revit operations without asking (on by default; untick in AI Settings to approve each action). Auto model choice from your installed Claude Code. Find elements and section boxes by category, level, parameter or phase, including in linked models. Color/halftone/hide view filters. Project info answers (e.g. where to save NWC). Whole-window Revit capture and dictation. Close all Revit windows before installation. Unsigned build; test on model copies."
+  "version": "3.4.0",
+  "sha256": "dfaec5f8dd76d70990872e29fc8b13755948c5cea8c13b904a883674a8657a29",
+  "notes": "Where models live: Files > Models shows each project's hosting (Forma cloud model or folder) and opens it, even from an empty Revit (\"open ROXX22CO212 arch model\"). NWC export set once for everyone: for each 3D view with NWC in its name, pick its file name and Forma location(s); saved in the model (Sync with Central to share) and Forma paths work on every user's PC. Shared team folder: create \"Bob Team\" in a Forma project. Markup tools for captures, Enter sends, toolbar arrows, icons and tooltips. Close all Revit windows before installation. Unsigned build; test on model copies."
 }
