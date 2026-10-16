@@ -1,6 +1,6 @@
 # AI RG: Bob for Revit
 
-Public installer distribution for Bob 3.4.0, supporting Revit 2024, 2025 and 2026 on Windows. Anyone may download and install it without a GitHub account. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
+Public installer distribution for Bob 3.4.1, supporting Revit 2024, 2025 and 2026 on Windows. Anyone may download and install it without a GitHub account. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
 
 ## Install with one command
 
@@ -18,7 +18,7 @@ This command executes the setup script published in this repository. Review `Set
 
 The installer targets all three supported years by default. It does not install Revit itself, close Revit forcibly, install a Windows service or silently run future updates.
 
-After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.4.0**. Existing users keep their Claude settings and sign-in.
+After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.4.1**. Existing users keep their Claude settings and sign-in.
 
 For add-in-only installation, without installing/signing into Claude or configuring its path, the previous command remains available:
 
@@ -26,7 +26,30 @@ For add-in-only installation, without installing/signing into Claude or configur
 irm 'https://raw.githubusercontent.com/amhsekol/ai-rg-bob-installer/main/Install-Bob.ps1' | iex
 ```
 
-## New in 3.4.0: model locations, NWC export set once, markup
+## New in 3.4.1: review and continue paused tasks
+
+- **Normal pause, not lost context:** after eight AI rounds, Bob retains action
+  results and waits. Nothing resumes automatically.
+- **Review completed actions:** opens a read-only local record without calling
+  Claude or changing Revit. Result cards also show reported status above raw JSON.
+- **Continue remaining work:** runs up to eight more rounds in the same live
+  model, retaining results, original image context and duplicate-action protection.
+  It does not consume your composer draft. Use New chat for a different task;
+  ordinary Send is disabled while paused.
+- **Recovery boundaries:** model switches, settings changes and reopening a saved
+  chat invalidate continuation. Reopened chats include bounded historical results,
+  never executable actions or restored approvals. Cancellation and errors are
+  stops, not automatic retries; a context-size stop requires a new chat.
+- **Security dependency:** pins `System.Security.Cryptography.Pkcs` to 8.0.2,
+  the patched 8.x version for [CVE-2026-84008](https://github.com/advisories/GHSA-846f-f764-76mx)
+  and [CVE-2026-70162](https://github.com/dotnet/announcements/issues/454).
+
+Recorded success is not independent verification, and differently written code
+can still repeat an effect. Existing consent, advanced-code opt-in and action
+approval preferences are unchanged. Automated checks are not live-model
+acceptance; test on a model copy.
+
+## Retained from 3.4.0: model locations, NWC export set once, markup
 
 - **Where models live:** **Files > Models** lists each project's models and where
   they are hosted (Forma cloud model or folder), with **Open**. Bob records this
@@ -189,7 +212,7 @@ The package includes `START-HERE.md`, `UI-VERIFICATION.md`, per-year build manif
 The current ZIP SHA-256 is:
 
 ```text
-69beab35ff4a66627f2ad681d502615a58a3c6d4cb87e75d26a6e73556d15b89
+31229575ce4f46b37c0bf6308d74aaa2643687491da1b716b2fabf323a4a5ffc
 ```
 
 The public installer workflow tests Windows PowerShell 5.1 and PowerShell 7, checks the package hash and rejects unsafe archive paths before publishing a release. Automated checks do not replace live testing inside Revit.

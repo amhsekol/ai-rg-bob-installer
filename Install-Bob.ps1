@@ -2,9 +2,9 @@
 [CmdletBinding()]
 param([ValidateSet('All','2024','2025','2026')][string[]]$Versions = @('All'))
 $ErrorActionPreference = 'Stop'
-$script:BobVersion = '3.4.0'
-$script:BobFile = 'RG-AI-Assistant-Revit2024-2025-2026-v3.4.0.zip'
-$script:BobHash = 'dfaec5f8dd76d70990872e29fc8b13755948c5cea8c13b904a883674a8657a29'
+$script:BobVersion = '3.4.1'
+$script:BobFile = 'RG-AI-Assistant-Revit2024-2025-2026-v3.4.1.zip'
+$script:BobHash = '31229575ce4f46b37c0bf6308d74aaa2643687491da1b716b2fabf323a4a5ffc'
 $script:BobUrl = "https://github.com/amhsekol/ai-rg-bob-installer/releases/download/v$script:BobVersion/$script:BobFile"
 
 function Assert-BobPackage {

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "3.4.0",
-  "sha256": "dfaec5f8dd76d70990872e29fc8b13755948c5cea8c13b904a883674a8657a29",
-  "notes": "Where models live: Files > Models shows each project's hosting (Forma cloud model or folder) and opens it, even from an empty Revit (\"open ROXX22CO212 arch model\"). NWC export set once for everyone: for each 3D view with NWC in its name, pick its file name and Forma location(s); saved in the model (Sync with Central to share) and Forma paths work on every user's PC. Shared team folder: create \"Bob Team\" in a Forma project. Markup tools for captures, Enter sends, toolbar arrows, icons and tooltips. Close all Revit windows before installation. Unsigned build; test on model copies."
+  "version": "3.4.1",
+  "sha256": "31229575ce4f46b37c0bf6308d74aaa2643687491da1b716b2fabf323a4a5ffc",
+  "notes": "Bob now pauses after 8 AI rounds without losing action results. Review completed actions locally, then Continue remaining work in the same live model; nothing resumes automatically. Successful-action duplicate protection carries across continuation. Reopened chats restore historical results, not executable actions or approvals. Context-size limits require a new chat. Includes patched System.Security.Cryptography.Pkcs 8.0.2. Existing settings and 3.4.0 features are retained. Close all Revit windows before installation. Unsigned build; test on model copies."
 }

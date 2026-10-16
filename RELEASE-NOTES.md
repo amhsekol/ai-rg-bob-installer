@@ -1,21 +1,15 @@
-# Bob 3.4.0: Model Locations, NWC Export Set Once, Markup
+# Bob 3.4.1: Review and Continue Paused Tasks
 
-- **Where models live.** Files > Models shows every project's models and where they are hosted (Forma cloud model or folder), with Open. Bob records locations automatically whenever someone opens a model with Bob. From an empty Revit, ask "open <project> <model>" and Bob opens it (cloud models from Forma; central files as a new local copy).
-- **NWC export, set once for everyone.** For each 3D view with NWC in its name: an NWC file name and one or more locations picked from Autodesk Forma (Desktop Connector). Saved inside the model; Sync with Central shares it with every user. Forma locations are stored relative to Forma, so they resolve to each user's own Desktop Connector folder. "Update the NWCs" exports each view and replaces its files, so Forma gets new versions. Needs the free Navisworks NWC Export Utility.
-- **Team folder.** A folder named "Bob Team" in any Forma project (Project Files) is found automatically and holds shared Project info and model locations. AI Settings > Team folder can point elsewhere.
-- **Markup before sending.** Arrows, boxes, circles, pen, highlighter, text and leader notes on captured or attached images, with undo.
-- **Faster input.** Enter sends, Shift+Enter adds a line. Toolbar arrows; New chat and AI Settings stay visible; icons and tooltips on most buttons. Simpler Files window.
-- Close all Revit windows before installation. Unsigned build: test on model copies. Existing settings are kept.
+- Bob now pauses after eight AI rounds instead of clearing its action history and showing a generic error. Nothing resumes automatically.
+- Review completed actions opens a read-only local record. Result cards show reported status above the original JSON.
+- Continue remaining work runs up to eight more rounds in the same live model, retaining prior results, original image context and successful-action duplicate protection. Your composer draft is preserved.
+- Use New chat for a different task. Model switches, settings changes and reopening a saved chat invalidate continuation. Reopened chats include bounded historical results, never executable actions or restored approvals.
+- Cancellation and runtime errors stop work without automatic retries. Context-size limits require a new chat and target re-inspection.
+- Includes System.Security.Cryptography.Pkcs 8.0.2, patched for [CVE-2026-84008](https://github.com/advisories/GHSA-846f-f764-76mx) and [CVE-2026-70162](https://github.com/dotnet/announcements/issues/454).
+- Retains Bob 3.4.0 model locations, NWC export setup, capture markup and existing settings.
 
-# Bob 3.3.0: Fewer Questions, Section Boxes, Filters and Project Info
+Recorded success is not independent verification. Duplicate blocking does not detect every semantically equivalent rewrite of generated code. Existing cloud consent, advanced-code opt-in and action-approval preferences remain unchanged.
 
-- **Compact layout.** Tools in one row (mouse wheel scrolls it), a slim progress strip and a much larger chat area. Sharper text at every size, including 75%.
-- **Understands Revit language.** Bob restates each request in Revit terms ("Understood as: ...") and then acts. It uses your selection, the active view and its level as defaults and asks at most one question, only when a wrong guess would change, delete or export the wrong thing.
-- **Run Revit operations without asking.** New AI Settings option, on by default: model changes, PDF exports, family loads and enabled advanced code run without approval dialogs. Untick it to approve each action. Revit Undo still reverses model changes.
-- **Auto model choice.** The Claude model dropdown lists the models your installed Claude Code accepts. **auto** (new default) uses haiku for quick questions, sonnet for ordinary edits and opus for multi-step, linked-model, phase, filter or image work. It never picks fable, which can bill usage credits.
-- **Section boxes and phases in links.** Find elements in the host or a linked model by category, level, parameter or phase; create a section box around everything that matches, e.g. one phase in the MEP link.
-- **View filters.** Color, halftone or hide elements by a parameter rule in the active view or its view template.
-- **Project info.** Store per-project notes (where to save NWC/Navisworks and other exports, standards, contacts) and ask Bob about them. Point AI Settings at a shared folder so the whole team gets the same answers.
-- **Capture Revit and Dictate.** Capture the whole Revit window, including Properties and Project Browser. Dictate opens Windows voice typing in the message box.
-- **New built-in skills** for section boxes by selection, category or linked-model phase; filters; halftone existing; and "Where to save NWC".
-- Close all Revit windows before installation. Unsigned build: test on model copies. Existing settings are kept; existing users keep their chosen model.
+Supports Revit 2024, 2025 and 2026. Automated core, native WPF, installer/updater and dependency checks passed for the source candidate; this does not establish live-Revit or real-Claude acceptance.
+
+Save your work and close every Revit window before installation. Unsigned build: test on model copies. No silent installation or automatic model changes are performed by publishing this release.
