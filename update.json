@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "3.4.1",
-  "sha256": "31229575ce4f46b37c0bf6308d74aaa2643687491da1b716b2fabf323a4a5ffc",
-  "notes": "Bob now pauses after 8 AI rounds without losing action results. Review completed actions locally, then Continue remaining work in the same live model; nothing resumes automatically. Successful-action duplicate protection carries across continuation. Reopened chats restore historical results, not executable actions or approvals. Context-size limits require a new chat. Includes patched System.Security.Cryptography.Pkcs 8.0.2. Existing settings and 3.4.0 features are retained. Close all Revit windows before installation. Unsigned build; test on model copies."
+  "version": "3.5.0",
+  "sha256": "e8a28e4a8610092773a5efc9778b0a7c7b8b49a8adc8f5ba506fccb3b4a016d3",
+  "notes": "Adds Create RG Report with editable drafts, example-PDF references and RG-branded preview/export. Adds Active View Family Takeoff to RG PDF: select host-view families and measurement sources; group family/type/workset/length with quantities, fractional feet/inches, pounds, family subtotals and overall totals. Takeoffs use exact 11x18 portrait pages with the RG logo on every page. Missing measurements stay unavailable or partial. Takeoff calculation is local, with no AI calls or model edits. Retains 3.4.1 recovery/security fixes and existing settings. Close all Revit windows before installation. Unsigned build; validate on model copies before procurement."
 }

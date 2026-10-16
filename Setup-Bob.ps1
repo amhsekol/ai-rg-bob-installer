@@ -1,6 +1,6 @@
 # One-command first-time setup. Browser sign-in and project-data permission remain personal.
 $ErrorActionPreference = 'Stop'
-$script:BobSetupInstallerHash = '41c77f92da6633a7b5d0a02d7e4ee5f1c4d2148a080721407766f077d391ea80'
+$script:BobSetupInstallerHash = '5262a4e853753b247bdac838d13bbb382baed6cd79c11bc2d46a4b643fa3427c'
 
 function Assert-BobSetupClosed {
     if ($env:OS -ne 'Windows_NT') { throw 'Bob requires Windows and Revit 2024, 2025 or 2026.' }

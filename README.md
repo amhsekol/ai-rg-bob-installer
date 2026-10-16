@@ -1,6 +1,6 @@
 # AI RG: Bob for Revit
 
-Public installer distribution for Bob 3.4.1, supporting Revit 2024, 2025 and 2026 on Windows. Anyone may download and install it without a GitHub account. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
+Public installer distribution for Bob 3.5.0, supporting Revit 2024, 2025 and 2026 on Windows. Anyone may download and install it without a GitHub account. This repository contains installation scripts, compiled installer packages, checksums, documentation and installer tests, not the private add-in development repository or its history.
 
 ## Install with one command
 
@@ -18,7 +18,11 @@ This command executes the setup script published in this repository. Review `Set
 
 The installer targets all three supported years by default. It does not install Revit itself, close Revit forcibly, install a Windows service or silently run future updates.
 
-After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.4.1**. Existing users keep their Claude settings and sign-in.
+After installation, open a model copy and choose **AI RG → Chat with Bob**. Confirm the header says **Chat 3.5.0**. Existing users keep their Claude settings and sign-in.
+
+Already using Bob? Open **Updates > Check now > Install after Revit closes**.
+Save your work and close every Revit window when prompted, then reopen Revit
+and confirm **Chat 3.5.0**. Publishing an update does not install it silently.
 
 For add-in-only installation, without installing/signing into Claude or configuring its path, the previous command remains available:
 
@@ -26,7 +30,42 @@ For add-in-only installation, without installing/signing into Claude or configur
 irm 'https://raw.githubusercontent.com/amhsekol/ai-rg-bob-installer/main/Install-Bob.ps1' | iex
 ```
 
-## New in 3.4.1: review and continue paused tasks
+## New in 3.5.0: RG reports and active-view family takeoff
+
+- **Create RG Report:** Open **Files > Create RG Report** to enter a title,
+  instructions, optional project/preparer and an editable draft. Attach example
+  PDFs, select pages and review extracted text before generation. Examples guide
+  structure unless you explicitly allow their facts. Optional chat/model context
+  is off by default. AI drafting uses your existing Claude connection and cloud
+  permission without model-changing tools; manual editing, preview and save are local.
+- **Active View Family Takeoff → RG PDF:** Open the built-in skill or
+  **Files > Active View Family Takeoff**. Choose existing host-view families,
+  length parameters and compatible weight sources, or enter an explicit lb/ft
+  factor. Create, preview and save the takeoff without AI calls or model edits.
+- **Grouped quantities:** Family, type, workset, quantity, length each, total
+  length and pounds. Rows group by family/type/workset/displayed length; family
+  subtotals and overall totals use unrounded measurements. Lengths display feet
+  and fractional inches to 1/16 inch. Missing values are unavailable or partial,
+  never silently zero.
+- **RG PDF styling:** Supplied RG logo at top-left on every page, green headings,
+  repeated table headers and page numbers. Takeoffs are exactly **11 × 18 inches
+  portrait**; general reports and branded chat exports use US Letter portrait.
+  Revit drawing/sheet PDF export is unchanged.
+
+Takeoff scope follows Revit's active-view host collector, not pixel visibility.
+Linked contents and annotations are excluded. Check shared nested families and
+parent assemblies for overlapping quantities. Verify parameter definitions and
+totals against a schedule on a model copy before procurement. Oversized views
+and reports are refused rather than truncated. Example-PDF support is text
+extraction, not OCR or pixel-perfect template reproduction.
+
+Native Windows fixture captures using synthetic model data, not a live Revit model:
+
+![Active View Family Takeoff selection popup](screenshots/Bob-3.5.0-Takeoff-Picker.png)
+
+![Create RG Report editor](screenshots/Bob-3.5.0-Report-Editor.png)
+
+## Retained from 3.4.1: review and continue paused tasks
 
 - **Normal pause, not lost context:** after eight AI rounds, Bob retains action
   results and waits. Nothing resumes automatically.

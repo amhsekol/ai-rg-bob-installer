@@ -1,15 +1,42 @@
-# Bob 3.4.1: Review and Continue Paused Tasks
+# Bob 3.5.0: RG Reports and Active View Family Takeoff
 
-- Bob now pauses after eight AI rounds instead of clearing its action history and showing a generic error. Nothing resumes automatically.
-- Review completed actions opens a read-only local record. Result cards show reported status above the original JSON.
-- Continue remaining work runs up to eight more rounds in the same live model, retaining prior results, original image context and successful-action duplicate protection. Your composer draft is preserved.
-- Use New chat for a different task. Model switches, settings changes and reopening a saved chat invalidate continuation. Reopened chats include bounded historical results, never executable actions or restored approvals.
-- Cancellation and runtime errors stop work without automatic retries. Context-size limits require a new chat and target re-inspection.
-- Includes System.Security.Cryptography.Pkcs 8.0.2, patched for [CVE-2026-84008](https://github.com/advisories/GHSA-846f-f764-76mx) and [CVE-2026-70162](https://github.com/dotnet/announcements/issues/454).
-- Retains Bob 3.4.0 model locations, NWC export setup, capture markup and existing settings.
+- **Create RG Report:** New Files option for report instructions, editable drafts,
+  optional project/preparer, example-PDF attachments and local preview/export.
+  Examples guide structure by default; using their facts requires explicit opt-in.
+  Selected PDF pages are reviewed as extracted text, without OCR.
+- **Active View Family Takeoff → RG PDF:** New built-in skill and Files option
+  with a popup for existing families in the active host-model view. Choose length
+  and weight parameters or enter an explicit lb/ft factor. No AI calculation,
+  Claude transmission or model-changing transaction is part of the takeoff.
+- **Professional takeoff table:** Family, type, workset, quantity, length each,
+  total length and pounds. Grouped by family/type/workset/displayed length with
+  family subtotals and overall totals. Feet and fractional inches display to
+  1/16 inch; totals sum unrounded measurements. Missing values remain unavailable
+  or partial, not zero.
+- **RG-branded PDFs:** Supplied RG logo top-left on every page, green headings,
+  repeated table headers and page numbers. Takeoffs use exactly 11 × 18 inches
+  portrait; general reports and chat exports use US Letter portrait. Drawing
+  and sheet PDF export is unchanged.
+- **Validated export handling:** Compact report editor, explicit preview/save,
+  example-PDF overwrite protection, cancellation and complete compression
+  checksums before atomic file replacement.
+- Retains Bob 3.4.1 pause/review/continue recovery, Pkcs 8.0.2, NWC export,
+  model locations, capture markup and existing settings.
 
-Recorded success is not independent verification. Duplicate blocking does not detect every semantically equivalent rewrite of generated code. Existing cloud consent, advanced-code opt-in and action-approval preferences remain unchanged.
+AI report drafting uses the existing Claude subscription and cloud permission.
+Optional chat/model context is off by default, and report drafting has no Revit
+action tools. Manual report editing and export stay local.
 
-Supports Revit 2024, 2025 and 2026. Automated core, native WPF, installer/updater and dependency checks passed for the source candidate; this does not establish live-Revit or real-Claude acceptance.
+Takeoff scope is Revit's host-element view collector, not pixel visibility.
+Linked contents and annotations are excluded; parent assemblies and shared
+nested families may overlap. Confirm parameter definitions, missing values and
+totals against a trusted schedule before procurement. Saved reports describe
+the captured timestamp, not later model changes. Oversized views/reports are
+refused rather than silently truncated.
 
-Save your work and close every Revit window before installation. Unsigned build: test on model copies. No silent installation or automatic model changes are performed by publishing this release.
+Supports Revit 2024, 2025 and 2026. Automated core, native WPF, installer/updater,
+dependency and PDF checks are release gates, not live-model or real-Claude
+acceptance. Test on a model copy; this unsigned build is not Autodesk-certified.
+
+Save your work and close every Revit window before installation. Publishing
+this release does not silently install it or change anyone's model.
